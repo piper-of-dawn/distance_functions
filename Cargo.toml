@@ -12,10 +12,6 @@ version = "0.13.2"
 features = ["extension-module"]
 
 
-
-
-
-
 [lib]
 name = "distance_functions"
 crate-type = ["cdylib"]

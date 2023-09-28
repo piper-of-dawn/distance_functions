@@ -26,21 +26,21 @@
 ///
 /// edit_distance("kitten", "sitting"); // => 3
 /// ```
-/// 
-use rayon::prelude::*;
+///
 use pyo3::prelude::pyfunction;
+use rayon::prelude::*;
 
 fn levenshtein_distance(left: &str, right: &str) -> usize {
     let len_left = left.chars().count();
     let len_right = right.chars().count();
-    if len_left < len_right{
-        return levenshtein_distance(right, left) // The length of left is always greater than or equal to right
+    if len_left < len_right {
+        return levenshtein_distance(right, left); // The length of left is always greater than or equal to right
     }
     // handle special case of 0 length
     if len_left == 0 {
-        return len_right
+        return len_right;
     } else if len_right == 0 {
-        return len_left
+        return len_left;
     }
 
     let len_right = len_right + 1;
@@ -54,7 +54,7 @@ fn levenshtein_distance(left: &str, right: &str) -> usize {
         cur[i] = i;
     }
     // calculate edit distance
-    for (i,ca) in left.chars().enumerate() {
+    for (i, ca) in left.chars().enumerate() {
         // get first column for this row
         pre = cur[0];
         cur[0] = i + 1;
@@ -68,10 +68,16 @@ fn levenshtein_distance(left: &str, right: &str) -> usize {
                 // match or substitution
                 pre + if ca == cb { 0 } else { 1 }));
             pre = tmp;
-        }
+        };     
     }
     cur[len_right - 1]
 }
+
+
+
+
+
+
 
 #[pyfunction]
 pub fn compute_levenshtein_distance(left: Vec<&str>, right: Vec<&str>) -> Vec<usize> {
@@ -84,19 +90,13 @@ pub fn compute_levenshtein_distance(left: Vec<&str>, right: Vec<&str>) -> Vec<us
     differenced
 }
 
-// pub fn compute_levenshtein_distance_non_parallel(left: &Vec<&str>, right: &Vec<&str>) -> Vec<usize> {
-//     let zipped_series: Vec<(&&str, &&str)> = left.into_iter().zip(right.into_iter()).collect();
-//     let differenced = zipped_series
-//         .iter()
-//         .map(|(&a, &b)| levenshtein_distance(&a, &b))
-//         .collect::<Vec<usize>>();
-//     differenced
-// }
 
-    #[test]
-    fn test_levenshtein_distance () {
-        let left = vec!["kitten", "sitting"];
-        let right = vec!["sitting", "kitten"];
-        let result = compute_levenshtein_distance(left, right);
-        assert_eq!(result, vec![3, 3]);
-    }
+
+#[test]
+fn test_levenshtein_distance() {
+    let left = vec!["kitten", "sitting", "saturday", "sunday"];
+    let right = vec!["sitting", "kitten", "faturgay", "monday"];
+    let result = compute_levenshtein_distance(left, right);
+    assert_eq!(result, vec![3, 3, 2, 2]);
+}
+
