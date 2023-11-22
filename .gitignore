@@ -2,3 +2,8 @@ target/
 env/
 test.txt
 pyenv/
+*.pyc
+*.so
+*.sh
+*.ipynb
+*.csv

@@ -24,5 +24,7 @@ fn test_euclidean_distance () {
     let left: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
     let right: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
     let result = compute_euclidean_distance(left, right);
+    let left: Vec<f64> = vec![1.0, 2.0, 7.0, 4.0];
+    let right: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
     assert_eq!(result, 0.0);
 }

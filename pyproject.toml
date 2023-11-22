@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 dependencies = ["cffi"]
 classifiers = [
-    "Development Status :: 5 - Production/Unstable",
+    "Development Status :: 1 - Planning",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "License :: OSI Approved :: MIT License",
@@ -23,7 +23,7 @@ classifiers = [
 ]
 
 [build-system]
-requires = ["maturin>=0.14,<0.15"]
+requires = ["maturin>=0.14"]
 build-backend = "maturin"
 
 
@@ -32,7 +32,6 @@ build-backend = "maturin"
 
 [tool.maturin]
 bindings = "pyo3"
-compatibility = "manylinux2014"
 skip-auditwheel = false
 strip = true
 
